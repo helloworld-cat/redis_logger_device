@@ -4,7 +4,7 @@ With this library, you can inject log into Redis queue and process it this worke
 
 ## Installation
 
-Clone for github repository:
+Clone from github repository:
 
     $ git clone git@github.com:PagedeGeek/redis_logger_device.git
 
