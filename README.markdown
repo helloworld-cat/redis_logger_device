@@ -4,32 +4,32 @@ With this library, you can inject log into Redis queue and process it this worke
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Clone for github repository:
 
-    gem 'redis_logger_device'
+    $ git clone git@github.com:PagedeGeek/redis_logger_device.git
 
-And then execute:
+Build Gem:
 
-    $ bundle
+    $ gem build ./redis_logger_device.gemspec
 
-Or install it yourself as:
+Install it yourself as:
 
-    $ gem install redis_logger_device
+    $ sudo gem install ./redis_logger_device-0.0.1.gem 
 
 ## Usage
 
 ### In your application use Redis Device
 
 ``` ruby
-  require 'logger'
-  require 'redis_logger_device'
+require 'logger'
+require 'redis_logger_device'
 
-  dev = RedisLoggerDevice::Base.new
-  logger = Logger.new(dev)
+dev = RedisLoggerDevice::Base.new
+logger = Logger.new(dev)
 
-  logger.info("AAAAAaaaaaahhhhh")
+logger.info("AAAAAaaaaaahhhhh")
 
-  logger.close
+logger.close
 ```
 
 ---
@@ -37,37 +37,37 @@ Or install it yourself as:
 ### Make your Logger Worker in background for process log entries
 
 ``` ruby
-  require 'logger'
-  require 'redis_logger_device'
+require 'logger'
+require 'redis_logger_device'
 
-  include RedisLoggerDevice
+include RedisLoggerDevice
 
-  class SimpleLogWorker < LogWorker
-    def process_queue!
-      loop do
-        begin
-          @logger.info("LogWorker fetching (#{@queue_name})...")
-          key, val = @redis.brpop @queue_name
-          @logger.info("LogWorker rocess key: #{key}; val: #{val}")
+class SimpleLogWorker < LogWorker
+  def process_queue!
+    loop do
+      begin
+        @logger.info("LogWorker fetching (#{@queue_name})...")
+        key, val = @redis.brpop @queue_name
+        @logger.info("LogWorker rocess key: #{key}; val: #{val}")
 
-          #your code : val = log entry
+        #your code : val = log entry
 
-        rescue SignalException => e
-          raise e
-        rescue Exception => e
-          @logger.fatal "LogWorker error: #{e.message}"
-          raise e
-        end
+      rescue SignalException => e
+        raise e
+      rescue Exception => e
+        @logger.fatal "LogWorker error: #{e.message}"
+        raise e
       end
     end
   end
+end
 
-  worker_logger = Logger.new(STDOUT)
-  worker = SimpleLogWorker.new(worker_logger)
+worker_logger = Logger.new(STDOUT)
+worker = SimpleLogWorker.new(worker_logger)
 
-  worker.process_queue!
+worker.process_queue!
 
-  worker_looger.close
+worker_looger.close
 ```
 
 ## Contributing
