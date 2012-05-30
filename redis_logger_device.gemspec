@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["samuel@pagedegeek.com"]
   gem.description   = %q{With this library, you can inject log into Redis queue and process it this worker}
   gem.summary       = %q{Simple Device for Logger}
-  gem.homepage      = "http://www.github.com/pagedegeek"
+  gem.homepage      = "https://github.com/PagedeGeek/redis_logger_device"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
