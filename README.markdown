@@ -4,17 +4,9 @@ With this library, you can inject log into Redis queue and process it this worke
 
 ## Installation
 
-Clone from github repository:
-
-    $ git clone git@github.com:PagedeGeek/redis_logger_device.git
-
-Build Gem:
-
-    $ gem build ./redis_logger_device.gemspec
-
 Install it yourself as:
 
-    $ sudo gem install ./redis_logger_device-0.0.1.gem 
+    $ gem install redis_logger_device
 
 ## Usage
 
