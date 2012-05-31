@@ -3,7 +3,7 @@ module RedisLoggerDevice
 
     def initialize(logger, queue_name=DEFAULT_QUEUE_NAME, redis_opts={})
       @logger = logger
-      @queue_name = DEFAULT_QUEUE_NAME
+      @queue_name = queue_name
       @redis = Redis.new(redis_opts)
     end
 
